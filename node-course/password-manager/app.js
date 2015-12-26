@@ -5,6 +5,8 @@ var storage = require('node-persist');
 //get your computer ready for writing and saving variables
 storage.initSync();
 
+//---------------------------------Practice on node-persist-------------------------
+
 /*//Saving variable to computer
 //storage.setItemSync('name', 'Sunny');
 
@@ -34,7 +36,7 @@ console.log('Saved name is ' + name);  */
 	balance: 382983298
 }]);*/
 
-var accounts = storage.getItemSync('accounts');
+/*var accounts = storage.getItemSync('accounts');
 
 accounts.push({
 	username: 'yoyo',
@@ -43,4 +45,61 @@ accounts.push({
 
 storage.setItemSync('accounts',accounts);
 
-console.log(accounts);
+console.log(accounts);*/
+
+
+//------------------------------ Password Manager-----------------------------------
+
+//account.name
+//account.username
+//account.password
+
+function createAccount(account){
+	var accounts = storage.getItemSync('accounts');
+
+	//if accounts is undefined
+	// set accounts = []
+
+	if(typeof accounts === 'undefined'){
+		accounts = [];
+	}
+
+	//push to push on new account
+
+	accounts.push(account);
+
+	storage.setItemSync('accounts', accounts);
+
+	// return account
+	return account;
+}
+
+function getAccount(accountName){
+
+	var accounts = storage.getItemSync('accounts');
+
+	if(typeof accounts === 'undefined'){
+		console.log('Please enter an account');
+	}else{
+
+		var i,matchedAccount;
+		for(i = 0; i < accounts.length; i++){
+			account = accounts[i];
+			if(account.name === accountName){
+				matchedAccount = account;
+			}
+		}
+	}
+	//loop up an find account.Name that matches
+	//return it
+	return matchedAccount;
+}
+
+// createAccount({
+// 	name: 'Facebook',
+// 	username: 'Sunny@gmail.com',
+// 	password: 'password123!'
+// });
+
+var facebookAccount = getAccount('Facebook');
+console.log(facebookAccount);
