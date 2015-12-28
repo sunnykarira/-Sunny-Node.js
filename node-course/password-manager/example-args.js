@@ -38,3 +38,4 @@ if(command === 'hello' && typeof argv.name !== 'undefined' && typeof argv.lastna
 }else{
 	console.log('Hello World');
 }
+
