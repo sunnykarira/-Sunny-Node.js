@@ -110,14 +110,24 @@ function getAccount(accountName, masterpassword){
 }
 
 if(command === 'create'){
-	createAccount({
-		name: argv.n,
-		username: argv.u,
-		password: argv.p
-	}, argv.m);
+	try{
+			createAccount({
+			name: argv.n,
+			username: argv.u,
+			password: argv.p
+			}, argv.m);
+    } catch(e){
+		console.log('Unable to create Account!');
+		console.log(e.message)
+	}
 }else if(command === 'get'){
-	var account = getAccount(argv.n, argv.m);
-	console.log(account);
+	try{
+		var account = getAccount(argv.n, argv.m);
+		console.log(account);
+	}catch(e){
+		console.log('Unable to fetch account');
+		console.log(e.message);
+	}
 }
 
 // But this program will fail at
